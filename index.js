@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
+const greeting = require('./middlewares/greetings')
+
+app.use(greeting('Daniel'))
+
 app.use((req,res,next) => {
     console.log('Antes...')
     next()
