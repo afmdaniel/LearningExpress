@@ -10,6 +10,25 @@ app.use((req,res,next) => {
     next()
 })
 
+app.get('/client/report', (req, res) => {
+    res.send(`Cliente relatório:${ req.query.completo === 'true'? ` Entregue! Ano ${req.query.ano}`: ' Pendente' }`)
+})
+
+app.get('/client/:id', (req, res) => {
+    res.send(`Cliente ${req.params.id} selecionado!`)
+})
+
+app.post('/body', (req, res) => {
+    let body = ''
+    req.on('data', function(piece) {
+        body += piece
+    })
+
+    req.on('end', function() {
+        res.send(body)
+    })
+})
+
 app.get('/', (req, res, next) => { 
     console.log('Durante...')
     res.json([
